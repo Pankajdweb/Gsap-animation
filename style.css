@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;}
+
+.page-wrapper{}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.animationbox {
+    width: 80px;
+    height: 80px;
+    background-color: brown;
+}
