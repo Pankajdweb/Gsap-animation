@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
-
 </head>
 
 <body>
@@ -61,14 +60,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </section>
-
-
-
-
     </main>
 
 
@@ -76,7 +69,57 @@
     <!-- Script CDN FOr gsap From https://greensock.com/docs/v3/Installation?checked=core,scrollTrigger#NPM -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="./gsap.js"></script>
+    <script>
+        //    Script for the on scroll tab target 
+        let currentCenteredImage = null;
+        // Function to add or remove classes based on the centered image
+        function handleCenteredImage(image, dcarimgno) {
+            const rect = image.getBoundingClientRect();
+            const centerOffset = window.innerHeight / 2;
+            const centerPosition = rect.top + rect.height / 2;
+            const isActive = Math.abs(centerPosition - centerOffset) < rect.height / 2;
+            console.log(rect);
+            console.log(centerOffset);
+
+            if (isActive) {
+                if (currentCenteredImage !== image) {
+                    if (currentCenteredImage) {
+                        const prevDcarimgno = currentCenteredImage.getAttribute("dcarimgno");
+                        document.body.classList.remove(`dcaractive-${prevDcarimgno}`);
+                    }
+                    document.body.classList.add(`dcaractive-${dcarimgno}`);
+                    currentCenteredImage = image;
+                }
+            }
+        }
+
+        // Set up scroll triggers for each image
+        const dCimages = document.querySelectorAll(".dcar-img-wrap");
+        dCimages.forEach(image => {
+            const dcarimgno = image.getAttribute("dcarimgno");
+            gsap.to(image, {
+                scrollTrigger: {
+                    trigger: image,
+                    scrub: true,
+                    markers: true,
+                    onUpdate: () => handleCenteredImage(image, dcarimgno),
+                }
+            });
+        });
+
+        // Set the default centered image to the first image
+        window.addEventListener("load", () => {
+            const firstImage = images[0];
+            const dcarimgno = firstImage.getAttribute("dcarimgno");
+            document.body.classList.add(`dcaractive-${dcarimgno}`);
+            currentCenteredImage = firstImage;
+        });
+
+
+
+    </script>
+
+
 </body>
 
 </html>
