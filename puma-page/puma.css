@@ -103,3 +103,37 @@ body {
     width: 100%;
     max-width: 1.5rem;
 }
+
+.getbtn-wrap{
+    overflow: hidden;
+}
+
+
+.hero-wrapper{
+    padding-top: 15rem;    
+    }
+
+
+    .hhero-head{
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+
+    }
+.hhero-caption{
+    font-size: 1.5rem;
+}
+
+    .hhero-title{
+        margin-top: 2rem;
+        font-size: 10rem;
+    }
+
+
+    .hh-circle{
+        width: 5rem;
+        height: 5rem;
+        display: inline-block;
+        background-color: red;
+    }
